@@ -26,7 +26,7 @@ a{color:var(--dark)}
 .topbar a.back:hover{text-decoration:underline}
 .topbar .tag{font-weight:700;color:#fff;background:var(--dark);padding:.35rem .85rem;border-radius:999px;font-size:.85rem;letter-spacing:.02em}
 .toggle{font:inherit;font-weight:700;color:var(--ink);background:transparent;border:2px solid var(--ink);border-radius:999px;padding:.3rem .85rem;cursor:pointer;min-height:40px}
-.docwrap{max-width:840px;margin:0 auto;padding:clamp(1.5rem,5vw,3.5rem) clamp(1rem,4vw,1.5rem) 5rem}
+.docwrap{max-width:960px;margin:0 auto;padding:clamp(1.5rem,5vw,3.5rem) clamp(1rem,4vw,1.5rem) 5rem}
 .docwrap img{max-width:100%;height:auto;display:block;margin:1.25rem auto;border-radius:10px;border:1px solid var(--line)}
 .docwrap table{border-collapse:collapse;width:100% !important;margin:1rem 0;font-size:.95rem;display:block;overflow-x:auto;white-space:normal}
 .docwrap table td, .docwrap table th{border:1px solid var(--line);padding:.5rem .6rem;vertical-align:top}
@@ -36,11 +36,44 @@ a{color:var(--dark)}
 .docwrap > p:first-of-type{margin-top:0}
 footer.pagefoot{border-top:1px solid var(--line);padding:1.5rem clamp(1rem,4vw,2.5rem);color:var(--muted);font-size:.9rem;text-align:center}
 @media print{ .topbar{display:none} .docwrap{max-width:none;padding:0} }
+
+/* ---- fix: widen the reading column and remove Word's leftover page-top gap ---- */
+.docwrap > p:first-of-type{margin-top:0 !important}
+.docwrap table[width]{width:100% !important}
+.docwrap table col[width]{width:auto !important}
+
+/* ---- fix: force readable text in dark mode over Word's hard-coded inline colors ---- */
+:root[data-theme="dark"] .docwrap,
+:root[data-theme="dark"] .docwrap p,
+:root[data-theme="dark"] .docwrap li,
+:root[data-theme="dark"] .docwrap span,
+:root[data-theme="dark"] .docwrap font,
+:root[data-theme="dark"] .docwrap h1,
+:root[data-theme="dark"] .docwrap h2,
+:root[data-theme="dark"] .docwrap h3{
+  color: var(--ink) !important;
+}
+:root[data-theme="dark"] .docwrap a{ color: var(--accent) !important; }
+/* but leave colour swatches, status chips and the header card exactly as designed */
+:root[data-theme="dark"] .docwrap td[bgcolor] font,
+:root[data-theme="dark"] .docwrap td[bgcolor] span,
+:root[data-theme="dark"] .docwrap td[style*="background"] font,
+:root[data-theme="dark"] .docwrap td[style*="background"] span{
+  color: revert !important;
+}
+
+/* ---- fix: headings keep one consistent size/colour instead of Word's mixed inline sizes ---- */
+.docwrap h1 font, .docwrap h1 font *,
+.docwrap h2 font, .docwrap h2 font *,
+.docwrap h3 font, .docwrap h3 font *{
+  font-size: inherit !important;
+  color: inherit !important;
+}
 </style>
 </head>
 <body>
 <div class="topbar">
-  <a class="back" href="Potfolio.html">&larr; Back to portfolio</a>
+  <a class="back" href="index.html">&larr; Back to portfolio</a>
   <span class="tag">ResellerOS</span>
   <button class="toggle" id="theme" type="button">Dark mode</button>
 </div>
@@ -57,7 +90,7 @@ Case Study and Technical Documentation</font></p>
 AI-powered web app for online resellers: listing generation, profit
 tracking, stock watchlist and overview dashboard</font></font></p>
 <p align="center" style="line-height: 100%; margin-bottom: 0in"><font size="2" style="font-size: 11pt">Prepared
-by Musfirah Ihsan (BB)</font></p>
+by Musfirah Ihsan</font></p>
 <p align="center" style="line-height: 100%; margin-bottom: 0in"><font color="#555555"><font size="2" style="font-size: 10pt">UI/UX
 and Product Design portfolio, Figma wireframes and prototype</font></font></p>
 <p align="center" style="line-height: 100%; margin-bottom: 0.35in"><font color="#555555"><font size="2" style="font-size: 10pt">Version
@@ -2833,10 +2866,7 @@ points</h3>
 <li><p style="line-height: 100%; margin-bottom: 0.04in">W3C, WCAG
 	2.2, Recommendation of 5 October 2023.</p></li>
 </ul>
-<div title="footer"><p align="center" style="line-height: 100%; margin-top: 0.22in; margin-bottom: 0in">
-<font color="#777777"><font size="1" style="font-size: 8pt">ResellerOS
-	| UX case study and technical documentation | Page </font></font><span style="background: #c0c0c0"><sdfield format="PAGE" subtype="RANDOM" type="PAGE">18</sdfield></span></p>
-</div>
+
 
 </div>
 <footer class="pagefoot">UX case study and technical documentation by Musfirah Ihsan. </footer>
